@@ -19,6 +19,7 @@ envConfig = configHandler.getEnvConfig(environmentConfig)
 
 bootstrap_server = envConfig.bootstrapServer
 topic = envConfig.topics
+fileName = availableConfigs[int(configIndex)]+"_"+topic
 messageFilter = raw_input("Digite as strings pela qual filtrar (separadas por ','):")
 
 print 'connecting...'
@@ -31,9 +32,10 @@ for message in consumer:
     # e.g., for unicode: `message.value.decode('utf-8')`
     
     if any(filterString in message.value for filterString in messageFilter.split(',')) or not messageFilter:
-        f=open("messageFile.txt", "a+")
+        f=open(fileName+".txt", "a+")
         f.write('Topic:{}, Partition:{}\n{}\n\n'.format(message.topic,message.partition,message.value+"\n"))
         f.close()
+        print 'Nova Mensagem capturada!!'
     else: 
         print ("Mensagens ignoradas: %s:%d:%d: key=%s value=%s\n\n" % (message.topic, message.partition,
                                                                                       message.offset, message.key,

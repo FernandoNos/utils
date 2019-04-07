@@ -1,8 +1,0 @@
-Topic:test, Partition:0
-fdsafdsfsdafsa
-
-
-Topic:test, Partition:0
-oifafodaisfodsaifdsa
-
-
