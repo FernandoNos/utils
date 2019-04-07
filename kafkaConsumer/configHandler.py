@@ -19,5 +19,4 @@ def getEnvConfig(environment):
     bootstrapServer = config['DEV']['BootstrapServer']
     topics = config['DEV']['Topics']
     envConfig = EnvConfig(bootstrapServer,topics)
-    print envConfig.topics
     return envConfig

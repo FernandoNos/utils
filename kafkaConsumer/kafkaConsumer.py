@@ -30,27 +30,28 @@ for message in consumer:
     # message value and key are raw bytes -- decode if necessary!
     # e.g., for unicode: `message.value.decode('utf-8')`
     
-    if any(filterString in message.value for filterString in messageFilter.split(',')):
+    if any(filterString in message.value for filterString in messageFilter.split(',')) or not messageFilter:
         f=open("messageFile.txt", "a+")
-        f.write(message.value+"\n")
+        f.write('Topic:{}, Partition:{}\n{}\n\n'.format(message.topic,message.partition,message.value+"\n"))
         f.close()
-    print ("%s:%d:%d: key=%s value=%s" % (message.topic, message.partition,
-                                          message.offset, message.key,
-                                          message.value))
+    else: 
+        print ("Mensagens ignoradas: %s:%d:%d: key=%s value=%s\n\n" % (message.topic, message.partition,
+                                                                                      message.offset, message.key,
+                                                                                      message.value))
 
 # consume earliest available messages, don't commit offsets
-KafkaConsumer(auto_offset_reset='earliest', enable_auto_commit=False)
+#KafkaConsumer(auto_offset_reset='earliest', enable_auto_commit=False)
 
 # consume json messages
-KafkaConsumer(value_deserializer=lambda m: json.loads(m.decode('ascii')))
+#KafkaConsumer(value_deserializer=lambda m: json.loads(m.decode('ascii')))
 
 # consume msgpack
-KafkaConsumer(value_deserializer=msgpack.unpackb)
+#KafkaConsumer(value_deserializer=msgpack.unpackb)
 
 # StopIteration if no message after 1sec
-KafkaConsumer(consumer_timeout_ms=1000)
+#KafkaConsumer(consumer_timeout_ms=1000)
 
 # Subscribe to a regex topic pattern
-consumer = KafkaConsumer()
-consumer.subscribe(pattern='^awesome.*')
+#consumer = KafkaConsumer()
+#consumer.subscribe(pattern='^awesome.*')
 
