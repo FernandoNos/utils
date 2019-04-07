@@ -7,7 +7,7 @@ class EnvConfig:
 
 def readConfig():
     config = configparser.ConfigParser()
-    config.read('test.ini')
+    config.read('envConfigs.ini')
     return config
 
 def availableConfigs():
