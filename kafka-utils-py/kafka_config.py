@@ -1,10 +1,14 @@
-from configparser import ConfigParser
+import yaml
 
-configParser = ConfigParser()
-configParser.read('CONFIG.INI')
+environment = 'DEV'
+all_configs = {}
+config = {}
 
-environment = configParser['DEFAULT']['default_environment']
-config = configParser[environment]
+with open('config.yml') as f:
+
+    all_configs = yaml.load(f, Loader=yaml.FullLoader)
+    environment = all_configs['DEFAULT']['default_environment']
+    config = all_configs[environment]
 
 
 def get_environment():
@@ -16,7 +20,7 @@ def get_config(config_path):
     global config
     global environment
 
-    return configParser[environment][config_path]
+    return all_configs[environment][config_path]
 
 
 def init_config():
@@ -40,4 +44,4 @@ def change_environment():
     elif env == '3':
         environment = 'UAT'
 
-    config = configParser[environment]
+    config = all_configs[environment]
