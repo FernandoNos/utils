@@ -1,5 +1,6 @@
 
 from kafka_consumer import *
+from kafka_producer import *
 
 if __name__ == '__main__':
 
@@ -13,7 +14,7 @@ if __name__ == '__main__':
             configs = config_kafka_consumer()
             init_kafka_consumer(configs)
         elif option == '2':
-            print("TODO WRITER")
+            send_messages()
         elif option == '3':
             print("TODO NEW CONFIG")
         else:
