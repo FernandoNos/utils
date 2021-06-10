@@ -6,9 +6,10 @@ def config_kafka_consumer():
     host = get_config('host')
     return {
         'bootstrap.servers': host,
-        'group.id': 'test-1234',
+        'group.id': 'tefafafa1st-123445',
         'enable.auto.commit': True,
         'session.timeout.ms': 6000,
+        'default.topic.config': {'auto.offset.reset': 'smallest'}
     }
 
 
