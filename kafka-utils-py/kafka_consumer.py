@@ -1,9 +1,10 @@
 from confluent_kafka import Consumer, KafkaError
-from kafka_config import get_config
+from kafka_config import get_config, get_topics
 
 
 def config_kafka_consumer():
     host = get_config('host')
+    topics = select_topics_to_consume()
     return {
         'bootstrap.servers': host,
         'group.id': 'tefafafa1st-1234fafafafa45',
@@ -11,6 +12,22 @@ def config_kafka_consumer():
         'session.timeout.ms': 6000,
         'default.topic.config': {'auto.offset.reset': 'smallest'}
     }
+
+
+def select_topics_to_consume():
+    topics = get_topics()
+    menu = "Select one or more topics:\n"
+
+    index = 0
+    for topic in topics:
+        menu += "{0}. {1}\n".format(format(index), topic)
+        index += 1
+
+    menu += "Indexes:"
+
+    options = input(menu)
+
+    return topics
 
 
 def init_kafka_consumer(configs):

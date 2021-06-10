@@ -5,7 +5,6 @@ all_configs = {}
 config = {}
 
 with open('config.yml') as f:
-
     all_configs = yaml.load(f, Loader=yaml.FullLoader)
     environment = all_configs['DEFAULT']['default_environment']
     config = all_configs[environment]
@@ -25,6 +24,10 @@ def get_config(config_path):
 
 def init_config():
     change_environment()
+
+
+def get_topics():
+    return all_configs['DEFAULT']['topics']
 
 
 def change_environment():
