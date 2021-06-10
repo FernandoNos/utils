@@ -1,9 +1,11 @@
-from kafka import KafkaConsumer
 from confluent_kafka import Consumer, KafkaError
+from kafka_config import get_config
+
 
 def config_kafka_consumer():
+    host = get_config('host')
     return {
-        'bootstrap.servers': 'dev-events-broker-id-1.dev-sicredi.in:9092',
+        'bootstrap.servers': host,
         'group.id': 'test-1234',
         'enable.auto.commit': True,
         'session.timeout.ms': 6000,
@@ -11,7 +13,6 @@ def config_kafka_consumer():
 
 
 def init_kafka_consumer(configs):
-
     try:
         c = Consumer(configs)
         print("Connected!")
