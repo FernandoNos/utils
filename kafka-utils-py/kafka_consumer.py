@@ -6,7 +6,7 @@ def config_kafka_consumer():
     host = get_config('host')
     return {
         'bootstrap.servers': host,
-        'group.id': 'tefafafa1st-123445',
+        'group.id': 'tefafafa1st-1234fafafafa45',
         'enable.auto.commit': True,
         'session.timeout.ms': 6000,
         'default.topic.config': {'auto.offset.reset': 'smallest'}
@@ -24,7 +24,7 @@ def init_kafka_consumer(configs):
             if msg is None:
                 continue
             elif not msg.error():
-                print('Received message: {0}'.format(msg.value()))
+                print('Received message: {0}'.format(msg.value().decode('UTF-8')))
             elif msg.error().code() == KafkaError._PARTITION_EOF:
                 print('End of partition reached {0}/{1}'
                       .format(msg.topic(), msg.partition()))
