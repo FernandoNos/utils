@@ -43,7 +43,7 @@ def init_kafka_consumer(configs):
             if msg is None:
                 continue
             elif not msg.error():
-                print('Received message: {0}'.format(msg.value().decode('UTF-8')))
+                print('-->{0}\n {1}\n'.format(msg.topic(),msg.value().decode('UTF-8')))
             elif msg.error().code() == KafkaError._PARTITION_EOF:
                 print('End of partition reached {0}/{1}'
                       .format(msg.topic(), msg.partition()))
