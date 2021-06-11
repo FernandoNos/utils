@@ -1,13 +1,12 @@
 DEV:
-  host: dev-events-broker-id-1.dev-sicredi.in:9092
+  host: dev-events-broker-id-1.dev.in:9092
 TST:
-  host: tst-events-broker-id-1.tst-sicredi.in:9092
+  host: tst-events-broker-id-1.tst.in:9092
 UAT:
-  host: uat-events-broker-id-1.uat-sicredi.in:9092
+  host: uat-events-broker-id-1.uat.in:9092
 
 DEFAULT:
   default_environment: DEV
   topics:
-    - conecta-manual-notification-message
-    - conecta-manual-notification-message
-    - conecta-manual-notification-message
+    - topic 1
+    - topic 2

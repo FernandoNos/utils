@@ -4,10 +4,9 @@ from kafka_config import get_config, get_topics
 
 def config_kafka_consumer():
     host = get_config('host')
-    topics = select_topics_to_consume()
     return {
         'bootstrap.servers': host,
-        'group.id': 'tefafafa1st-1234fafafafa45',
+        'group.id': 'group',
         'enable.auto.commit': True,
         'session.timeout.ms': 6000,
         'default.topic.config': {'auto.offset.reset': 'smallest'}
@@ -16,7 +15,7 @@ def config_kafka_consumer():
 
 def select_topics_to_consume():
     topics = get_topics()
-    menu = "Select one or more topics:\n"
+    menu = "Select one or more topics (0,1,2):\n"
 
     index = 0
     for topic in topics:
@@ -25,17 +24,19 @@ def select_topics_to_consume():
 
     menu += "Indexes:"
 
-    selected_topics = input(menu).split(',')
-
-
-    return topics
+    selected_topics_string_indexes = input(menu).split(',')
+    selected_topics_indexes = list(map(int, selected_topics_string_indexes))
+    topics = get_topics()
+    selected_topics = list(map(lambda i: topics[i], selected_topics_indexes))
+    return selected_topics
 
 
 def init_kafka_consumer(configs):
     try:
         c = Consumer(configs)
         print("Connected!")
-        c.subscribe(['conecta-manual-notification-message'])
+        topics = select_topics_to_consume()
+        c.subscribe(topics)
         print("Subscribed!")
         while True:
             msg = c.poll(0.1)
