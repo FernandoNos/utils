@@ -25,7 +25,8 @@ def select_topics_to_consume():
 
     menu += "Indexes:"
 
-    options = input(menu)
+    selected_topics = input(menu).split(',')
+
 
     return topics
 
