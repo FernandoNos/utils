@@ -9,3 +9,4 @@ Python 3.9
 6. Run python main.py
 
 
+In order to add new topics, update the config.yml file, and add to the list of topics
