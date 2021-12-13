@@ -21,7 +21,7 @@ idna==2.10
 kafka-python==2.0.2
 langtable==0.0.54
 libcomps==0.1.15
-lxml==4.6.3
+lxml==4.6.5
 Mako==1.1.4.dev0
 MarkupSafe==1.1.1
 nftables==0.1
