@@ -69,4 +69,4 @@ swtpm-localca==0.5.2
 swtpm-setup==0.5.2
 systemd-python==234
 Tempita==0.5.1
-urllib3==1.25.10
+urllib3==1.26.5
